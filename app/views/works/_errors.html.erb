@@ -1,0 +1,16 @@
+<% if model.errors.messages.any? %>
+<section class="row status failure">
+  <% if model.id %>
+  <h3>A problem occured: Could not update <%= model.category.name %></h3>
+  <% else %>
+  <h3>A problem occured: Could not create <%= model.category.name %></h3>
+  <% end %>
+  <ul>
+  <% model.errors.messages.each do |title, messages| %>
+    <% messages.each do |m| %>
+      <li><%= title %> : <%= m %></li>
+    <% end %>
+  <% end %>
+  </ul>
+</section>
+<% end %>
