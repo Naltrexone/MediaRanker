@@ -1,4 +1,6 @@
 class WorksController < ApplicationController
+  before_action :find_work, only: [:show, :edit, :update, :destroy]
+
   def index
     @works = Work.all.top(25)
   end
@@ -19,12 +21,7 @@ class WorksController < ApplicationController
     end
   end
 
-  def show
-    @work = Work.find_by(id: params[:id].to_i)
-    if @work.nil?
-      render :not_found, status: :not_found
-    end
-  end
+  def show;  end
 
   def new
     @work = Work.new
@@ -41,28 +38,38 @@ class WorksController < ApplicationController
     end
   end
 
-  def edit
-    @work = Work.find_by(id: params[:id].to_i)
-  end
+  def edit; end
 
   def update
-    @work = Work.find_by(id: params[:id])
-    @work.update(work_params)
-    if @work.save
-      redirect_to work_path
+    if @work.update(work_params)
+      flash[:success] = 'Work edited'
+      redirect_to work_path(@work.id)
     else
       render :new
     end
   end
 
   def destroy
-    work = Work.find_by(id: params[:id].to_i)
-    work.destroy
+    if @work.votes.any?
+      @work.votes.each do |vote|
+        vote.destroy
+      end
+    end
+    @work.destroy
     flash[:success] = 'Work is deleted'
     redirect_to works_path
   end
 
   private
+
+  def find_work
+    @work = Work.find_by(id: params[:id].to_i)
+
+    if @work.nil?
+      flash.now[:danger] = "Cannot find the work #{params[:id]}"
+      render :not_found
+    end
+  end
 
   def work_params
     return params.require(:work).permit(:title, :publication_year, :creator, :description, :category)

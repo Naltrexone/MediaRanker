@@ -7,10 +7,9 @@ class VotesController < ApplicationController
       work = Work.find(params[:id])
       @votes = Vote.all
       @votes.each do |vote|
-        if vote.work_id == work.id && vote.user_id == user.id
+        if (vote.work_id == work.id && vote.user_id == user.id)
           flash[:failure] = "You have already voted for this!!"
-          redirect_back fallback_location: root_path
-          return
+          redirect_back fallback_location: root_path and return
         end
       end
 
@@ -19,7 +18,7 @@ class VotesController < ApplicationController
       if new_vote.save
         flash[:success] = "Successfully upvoted!"
       else
-        flash[:failure] = "Could not upvote"
+        flash[:failure] = "Could not upvote!"
       end
 
     else
