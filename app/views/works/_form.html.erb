@@ -1,0 +1,29 @@
+<% if @work.id %>
+  <h3>Edit this <%= @work.category %></h3>
+<% else %>
+  <h3>Add a new work</h3>
+<% end %>
+
+<section>
+  <%= form_for @work do |f| %>
+
+  <%= f.label :category %>
+  <%= f.select(:category, Work::WORK) %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :creator %>
+  <%= f.text_field :creator %>
+
+  <%= f.label :publication_year %>
+  <%= f.text_field :publication_year %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.submit :class => 'btn btn-primary' %>
+
+  <% end %>
+
+</section>

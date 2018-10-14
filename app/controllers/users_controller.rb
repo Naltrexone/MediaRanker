@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   def show
-      @user = User.find_by(id: params[:id].to_i)
-      if id == nil
+    id = params[:id].to_i
+      @user = User.find_by(id: id)
+      if @user.nil?
         render :not_found, status: :not_found
       end
     end
@@ -23,19 +24,19 @@ class UsersController < ApplicationController
       end
     end
 
-    def edit
-      @user = User.find_by(id: params[:id].to_i)
-    end
+    # def edit
+    #   @user = User.find_by(id: params[:id].to_i)
+    # end
 
-    def update
-      @user = User.find_by(id:params[:id])
-      @user.update(user_params)
-      if @user.save
-        redirect_to user_path
-      else
-        render :new
-      end
-    end
+    # def update
+    #   @user = User.find_by(id:params[:id])
+    #   @user.update(user_params)
+    #   if @user.save
+    #     redirect_to user_path
+    #   else
+    #     render :new
+    #   end
+    # end
 
     def destroy
       user = User.find_by(id: params[:id].to_i)
@@ -47,4 +48,5 @@ class UsersController < ApplicationController
     def user_params
       return params.require(:user).permit(:username)
     end
-end
+
+ end

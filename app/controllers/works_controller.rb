@@ -1,22 +1,10 @@
 class WorksController < ApplicationController
   def index
-    @works = Work.all
-    @movies = []
-    @books = []
-    @albums = []
-    @works.each do |work|
-      if work.category == "movie"
-        @movies << work
-      elsif work.category == "book"
-        @books << work
-      else
-        @albums << work
-      end
-    end
+    @works = Work.all.top(25)
   end
 
   def main
-    @works = Work.all
+    @works = Work.all.top(25)
     @movies = []
     @books = []
     @albums = []
@@ -70,6 +58,7 @@ class WorksController < ApplicationController
   def destroy
     work = Work.find_by(id: params[:id].to_i)
     work.destroy
+    flash[:success] = 'Work is deleted'
     redirect_to works_path
   end
 

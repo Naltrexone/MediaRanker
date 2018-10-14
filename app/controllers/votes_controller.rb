@@ -1,55 +1,31 @@
 class VotesController < ApplicationController
-  def show
-    @vote = Vote.find_by(id: params[:id].to_i)
-    if id == nil
-      render :not_found, status: :not_found
-    end
-  end
 
-  def index
-    @votes = Vote.all
-  end
+  def upvote
 
-  def new
-    @vote = Vote.new
-  end
+    if session[:user_id]
+      user = User.find(session[:user_id])
+      work = Work.find(params[:id])
+      @votes = Vote.all
+      @votes.each do |vote|
+        if vote.work_id == work.id && vote.user_id == user.id
+          flash[:failure] = "You have already voted for this!!"
+          redirect_back fallback_location: root_path
+          return
+        end
+      end
 
-  def create
-    @vote = Vote.new(vote_params)
-    if @vote.save
-      redirect_to votes_path
+      new_vote = Vote.new(user: user, work: work)
+
+      if new_vote.save
+        flash[:success] = "Successfully upvoted!"
+      else
+        flash[:failure] = "Could not upvote"
+      end
+
     else
-      render :new
+      flash[:failure] = "You must log in to do that!"
     end
+    redirect_back fallback_location: root_path
   end
-
-
-  # def edit
-  #   @vote = Vote.find_by(id: params[:id].to_i)
-  # end
-  #
-  # def update
-  #   @vote = Vote.find_by(id:params[:id])
-  #   @vote.update(vote_params)
-  #   if @vote.save
-  #     redirect_to vote_path
-  #   else
-  #     render :new
-  #   end
-  # end
-
-  def destroy
-    vote = Vote.find_by(id: params[:id].to_i)
-    Vote.destroy
-    redirect_to votes_path
-  end
-
-private
-  def vote_params
-  return params.require(:vote).permit()
-end
-
-
-end
 
 end
