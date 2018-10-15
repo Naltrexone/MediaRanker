@@ -4,8 +4,7 @@ describe Work do
   describe "validations" do
 
     before  do
-      category = Category.first
-      @work = Work.new(category: category, title: "Test Title")
+      @work = Work.new(title: "Test Title")
     end
 
     it "is invalid without a title" do
@@ -14,7 +13,6 @@ describe Work do
       result = @work.valid?
 
       result.must_equal false
-      @work.errors.messages.must_include :title
     end
 
     it "is invalid with a duplicate title" do
@@ -22,11 +20,10 @@ describe Work do
       @work.title = title
       @work.save
 
-      second_work = Work.new(category: Category.first, title: title)
+      second_work = Work.new(title: title)
 
       result = second_work.valid?
       result.must_equal false
-      second_work.errors.messages.must_include :title
     end
 
   end

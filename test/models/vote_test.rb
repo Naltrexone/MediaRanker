@@ -1,3 +1,4 @@
+
 require "test_helper"
 
 describe Vote do
@@ -38,10 +39,12 @@ describe Vote do
     end
 
     it "is invalid with duplicate work/user combination" do
-      vote1 = Vote.create!( user: @user, work: @work )
-      vote2 = Vote.new( user: @user, work: @work )
+      vote1 = Vote.create!( user_id: @user.id, work_id: @work.id)
+      vote2 = Vote.new( user_id: @user.id, work_id: @work.id )
 
       result = vote2.valid?
+      puts vote2.work_id
+      puts vote1.work_id
 
       result.must_equal false
 
