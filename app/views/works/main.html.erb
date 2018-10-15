@@ -1,11 +1,11 @@
 <main>
     <section class="spotlight">
-      <h2 class="spotlight__header">
-        <span class="spotlight__header--prefix">Media Spotlight</span>
+      <h2 class="spotlight_header">
+        <span class="spotlight_header_prefix">Media Spotlight</span>
         <h2><%= link_to "#{@works.first.title}", work_path(@works.first.id) %> by
           <%= @works.first.creator %></h2>
       </h2>
-      <h6 class="spotlight__description">
+      <h6 class="spotlight_description">
         <%= @works.first.votes.count %> votes - <%= @works.first.description %>
       </h6>
    </section>
