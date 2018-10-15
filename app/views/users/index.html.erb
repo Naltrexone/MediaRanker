@@ -1,6 +1,7 @@
 <h3>List of Users</h3>
 
-<table>
+<section class="media-table">
+<table class="table">
   <thead>
     <tr>
       <th>Username</th>
@@ -14,5 +15,7 @@
     <% end %>
   </tbody>
 </table>
+</section>
 
-<%= link_to "Back to Media List", works_path%>
+<td><a class="btn btn-secondary" <%= link_to "Back to Media list", works_path %></a>
+  </td>

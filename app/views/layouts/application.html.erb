@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- <%#= favicon_link_tag asset_path('owl.ico'), :rel => 'icon', :type => "image/x-icon" %> -->
   <title>Media Ranker 2.0</title>
 
   <%= stylesheet_link_tag    "application", "https://fonts.googleapis.com/css?family=Gudea:400,700|Hammersmith+One", media: "all", 'data-turbolinks-track' => true %>
+  <%= favicon_link_tag(source='owl.jpg', options={}) %>
   <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -55,11 +55,13 @@
         </li>
       <% end %>
 
+      <% if session[:user_id] != nil %>
       <li class="nav-item app-header__nav_item">
         <a class="btn btn-primary"
           <%= link_to("Logout", logout_path, method: :delete) %>
         </a>
       </li>
+      <% end %>
 
     </ul>
 
@@ -70,7 +72,9 @@
 
     <% flash.each do |type, message| %>
       <section class="row status <%= type %>">
-        <h3><%= message %></h3>
+
+        <div class="alert alert-primary" role="alert"><%=message %>"</div>
+
         </section>
     <% end %>
 
