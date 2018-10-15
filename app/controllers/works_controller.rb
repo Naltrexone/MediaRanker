@@ -3,6 +3,18 @@ class WorksController < ApplicationController
 
   def index
     @works = Work.all.top(25)
+    @movies = []
+    @books = []
+    @albums = []
+    @works.each do |work|
+      if work.category == "movie"
+        @movies << work
+      elsif work.category == "book"
+        @books << work
+      else
+        @albums << work
+      end
+    end
   end
 
   def main

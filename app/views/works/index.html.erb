@@ -1,26 +1,82 @@
+<html>
+<main>
 <h2>List of Works</h2>
-<% category = ["movie", "book", "album"] %>
-<% category.each do |cat| %>
-<section>
+ <section class="media-table">
+   <h4>Album</h4>
+   <table class="table">
+     <thead>
+       <tr>
+         <th width=80>Votes</th>
+         <th>Title</th>
+         <th>Created By</th>
+         <th width=100>Published</th>
+         <th width=100>Upvote</th>
+       </tr>
+     </thead>
+     <% @albums.each do |album| %>
+     <tbody>
+         <tr>
+           <td><%= album.votes.count %></td>
+           <td><%= link_to album.title, work_path(album) %></td>
+           <td><%= album.creator %></td>
+           <td><%= album.publication_year %></td>
+           <td><%= link_to "Upvote", new_vote_path(album.id), method: :post, class: "button upvote" %> </td>
+         </tr>
+     </tbody>
+     <% end %>
+   </table>
+ </section>
 
-  <h4><%= cat.capitalize %>s</h4>
-      <tr>
-        <th>Votes</th>
-        <th>Title</th>
-        <th>Created By</th>
-        <th>Published</th>
-        <th>Upvote</th>
-      </tr>
-    </section>
-    <% category.each do |cat| %>
-    <section>
-      <% @works.find_all{ |w| w.category == cat }.each do |work| %>
-      <section class = "media-table">
-        <td><%= work.votes.count %></td>
-        <td><%= link_to work.title, work_path(work) %></td>
-        <td><%= work.creator %></td>
-        <td><%= work.publication_year %></td>
-        <td><%= link_to "Upvote", new_vote_path(work.id), method: :post, class: "button upvote" %></td>
-      <% end%>
-      </section>
-<% end %>
+ <section class="media-table">
+   <h4>Books</h4>
+   <table class="table">
+     <thead>
+       <tr>
+         <th width=80>Votes</th>
+         <th>Title</th>
+         <th>Created By</th>
+         <th width=100>Published</th>
+         <th width=100>Upvote</th>
+       </tr>
+     </thead>
+     <tbody>
+         <tr>
+           <td>0</td>
+           <td><a href="/works/195">i TOLD you not to delete it</a></td>
+           <td></td>
+           <td></td>
+           <td><a class="btn btn-primary" rel="nofollow" data-method="post" href="/works/195/upvote">Upvote</a></td>
+         </tr>
+     </tbody>
+   </table>
+ </section>
+ <section class="media-table">
+   <h4>Movies</h4>
+   <table class="table">
+     <thead>
+       <tr>
+         <th width=80>Votes</th>
+         <th>Title</th>
+         <th>Created By</th>
+         <th width=100>Published</th>
+         <th width=100>Upvote</th>
+       </tr>
+     </thead>
+     <tbody>
+         <tr>
+           <td>2</td>
+           <td><a href="/works/194">i told you not to delete it</a></td>
+           <td></td>
+           <td></td>
+           <td><a class="btn btn-primary" rel="nofollow" data-method="post" href="/works/194/upvote">Upvote</a></td>
+         </tr>
+     </tbody>
+   </table>
+ </section>
+
+<a class="btn btn-secondary" href="/">View top media</a>
+<a class="btn btn-primary" href="/works/new">Add a new work</a>
+
+ </main>
+</body>
+</html>
