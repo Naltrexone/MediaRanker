@@ -28,7 +28,7 @@
  </section>
 
  <section class="media-table">
-   <h4>Books</h4>
+   <h4>Book</h4>
    <table class="table">
      <thead>
        <tr>
@@ -39,19 +39,22 @@
          <th width=100>Upvote</th>
        </tr>
      </thead>
+     <% @books.each do |book| %>
      <tbody>
          <tr>
-           <td>0</td>
-           <td><a href="/works/195">i TOLD you not to delete it</a></td>
-           <td></td>
-           <td></td>
-           <td><a class="btn btn-primary" rel="nofollow" data-method="post" href="/works/195/upvote">Upvote</a></td>
+           <td><%= book.votes.count %></td>
+           <td><%= link_to book.title, work_path(book) %></td>
+           <td><%= book.creator %></td>
+           <td><%= book.publication_year %></td>
+           <td><%= link_to "Upvote", new_vote_path(book.id), method: :post, class: "button upvote" %> </td>
          </tr>
      </tbody>
+     <% end %>
    </table>
  </section>
+
  <section class="media-table">
-   <h4>Movies</h4>
+   <h4>Movie</h4>
    <table class="table">
      <thead>
        <tr>
@@ -62,17 +65,20 @@
          <th width=100>Upvote</th>
        </tr>
      </thead>
+     <% @movies.each do |movie| %>
      <tbody>
          <tr>
-           <td>2</td>
-           <td><a href="/works/194">i told you not to delete it</a></td>
-           <td></td>
-           <td></td>
-           <td><a class="btn btn-primary" rel="nofollow" data-method="post" href="/works/194/upvote">Upvote</a></td>
+           <td><%= movie.votes.count %></td>
+           <td><%= link_to movie.title, work_path(movie) %></td>
+           <td><%= movie.creator %></td>
+           <td><%= movie.publication_year %></td>
+           <td><%= link_to "Upvote", new_vote_path(movie.id), method: :post, class: "button upvote" %> </td>
          </tr>
      </tbody>
+     <% end %>
    </table>
  </section>
+
 
 <a class="btn btn-secondary" href="/">View top media</a>
 <a class="btn btn-primary" href="/works/new">Add a new work</a>
