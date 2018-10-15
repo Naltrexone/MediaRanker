@@ -1,8 +1,8 @@
 <main>
     <section class="spotlight">
       <h2 class="spotlight_header">
-        <span class="spotlight_header_prefix">Media Spotlight</span>
-        <% if @work.count != nil %>
+        <span class="spotlight_header_prefix">Media Spotlight: </span>
+        <% if @work.count > 0 %>
         <h2><%= link_to "#{@works.first.title}", work_path(@works.first.id) %> by
           <%= @works.first.creator %></h2>
       </h2>
