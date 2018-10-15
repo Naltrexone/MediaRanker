@@ -2,14 +2,14 @@
     <section class="spotlight">
       <h2 class="spotlight_header">
         <span class="spotlight_header_prefix">Media Spotlight</span>
-        <% if @work.count > 0 %>
+        <% if @work.count != nil %>
         <h2><%= link_to "#{@works.first.title}", work_path(@works.first.id) %> by
           <%= @works.first.creator %></h2>
       </h2>
       <h6 class="spotlight_description">
         <%= @works.first.votes.count %> votes - <%= @works.first.description %>
       </h6>
-      <% end %>
+        <% end %>
    </section>
 
    <hr class="root__hr" />
