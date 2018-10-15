@@ -5,10 +5,11 @@
   <p>Published: <%= @work.publication_year %></p>
   <p><%= @work.description %></p>
   <section>
-    <a class="btn btn-primary" href="/">Back to media ranks</a>
-    <a class="btn btn-primary" href="/works/198/edit">Edit</a>
-    <a class="btn btn-primary" rel="nofollow" data-method="post" href="/works/198/upvote">Upvote</a>
-    <a class="btn btn-danger" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/works/198">Delete</a>
+    <a class="btn btn-primary"
+      <%= link_to "Back to media ranks", works_path%></a>
+    <a class="btn btn-primary" <%= link_to "Edit", edit_work_path(@work.id)%></a>
+    <a class="btn btn-primary" <%= link_to "Upvote", new_vote_path(@work.id), method: :post %></a>
+    <a class="btn btn-danger" <%= link_to "Delete", work_path(@work.id), method: :delete, data: {confirm: "Are you sure?"} %></a>
   </section>
 </section>
 

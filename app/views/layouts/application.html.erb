@@ -36,34 +36,43 @@
         </li>
       </ul>
 
+      <ul class="nav app-header__user-nav-container">
+
         <% if session[:user_id] %>
-        <div class="btn btn-primary">
-        <% @user = User.find(session[:user_id])%>
-        <%= link_to("Logged in as #{@user.username}", user_path(@user.id), class: "button")%>
-        </div>
+          <li class="nav-item app-header__nav_item">
+            <a class="btn btn-primary"
+            <% @user = User.find(session[:user_id])%>
+            <%= link_to("Logged in as #{@user.username}", user_path(@user.id))%>
+            </a>
+          </li>
         <% end %>
 
       <% if session[:user_id] == nil %>
-      <div class="btn btn-primary">
-        <%= link_to("Login", login_path) %>
-      </div>
+        <li class="nav-item app-header__nav_item">
+          <a class="btn btn-primary"
+            <%= link_to("Login", login_path) %>
+          </a>
+        </li>
       <% end %>
 
-      <div class="btn btn-primary">
-        <%= link_to("Logout", logout_path, method: :delete) %>
-      </div>
+      <li class="nav-item app-header__nav_item">
+        <a class="btn btn-primary"
+          <%= link_to("Logout", logout_path, method: :delete) %>
+        </a>
+      </li>
+
+    </ul>
 
     </nav>
   </header>
 
-  <main class="row">
+  <main>
 
     <% flash.each do |type, message| %>
       <section class="row status <%= type %>">
         <h3><%= message %></h3>
         </section>
     <% end %>
-
 
     <%= yield %>
   </main>

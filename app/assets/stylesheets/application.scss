@@ -44,20 +44,6 @@
     margin-bottom: 5px
 }
 
-.app-header__nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between
-}
-
-.app-header__nav_item {
-    margin-top: 1rem
-}
-
-.app-header__nav_item .nav-link {
-    color: #00796B
-}
-
 .btn-primary {
     background-color: #26A69A;
     color: white;
@@ -81,6 +67,38 @@ h1, h2, h3, h4, h5 {
   font-weight: bold;
 }
 
-a, h3 {
+a, h2, h3 {
   color: #26A69A;
+}
+
+.top-ten__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 2em;
+}
+
+.list-group-item {
+  border: none;
+}
+
+.app-header__nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+.app-header__nav_item {
+    margin-top: 1rem
+}
+
+.app-header__nav_item .nav-link {
+    color: #00796B
+}
+
+.app-header__site-nav-container .app-header__nav_item {
+    margin-right: 2rem
+}
+
+.app-header__user-nav-container .nav-item {
+    margin-left: 2rem
 }
