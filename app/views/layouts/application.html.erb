@@ -14,28 +14,49 @@
 <body>
 
 
-  <header class="page-header row">
-    <h2><%= link_to("Media Ranker", root_path) %><small>Ranking the Best of Everything</small></h2>
-    <nav>
-      <%= link_to("View top media", root_path, class: "button") %>
-      <%= link_to("View all media", works_path, class: "button") %>
-      <%= link_to("Add a new work", new_work_path, class: "button") %>
-      <%= link_to("View all users", users_path, class: "button") %>
-      <div class="float-right">
+  <header class="app-header__header">
+    <h1>
+      <a href="/">Media Ranker</a>
+      <small>Ranking the Best of Everything</small>
+    </h1>
+
+    <nav class="app-header__nav">
+      <ul class="nav app-header__site-nav-container">
+        <li class="nav-item app-header__nav_item">
+          <a class="nav-link" href="/">View top media</a>
+        </li>
+        <li class="nav-item app-header__nav_item">
+          <a class="nav-link" href="/works">View all media</a>
+        </li>
+        <li class="nav-item app-header__nav_item">
+          <a class="nav-link" href="/works/new">Add a new work</a>
+        </li>
+        <li class="nav-item app-header__nav_item">
+          <a class="nav-link" href="/users">View all users</a>
+        </li>
+      </ul>
+
         <% if session[:user_id] %>
+        <div class="btn btn-primary">
         <% @user = User.find(session[:user_id])%>
         <%= link_to("Logged in as #{@user.username}", user_path(@user.id), class: "button")%>
-        <%= link_to("Logout", logout_path, method: :delete, class: "button") %>
-        <% else %>
-        <%= link_to("Login", login_path, class: "button float-right") %>
-        <a class="btn btn-primary" href="/login">Log In</a>
+        </div>
         <% end %>
+
+      <% if session[:user_id] == nil %>
+      <div class="btn btn-primary">
+        <%= link_to("Login", login_path) %>
       </div>
+      <% end %>
+
+      <div class="btn btn-primary">
+        <%= link_to("Logout", logout_path, method: :delete) %>
+      </div>
+
     </nav>
   </header>
 
   <main class="row">
-
 
     <% flash.each do |type, message| %>
       <section class="row status <%= type %>">

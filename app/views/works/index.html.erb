@@ -1,11 +1,9 @@
-<h3>List of Works</h3>
+<h2>List of Works</h2>
 <% category = ["movie", "book", "album"] %>
 <% category.each do |cat| %>
-<section class = "media-table">
+<section>
 
   <h4><%= cat.capitalize %>s</h4>
-  <table>
-    <thead>
       <tr>
         <th>Votes</th>
         <th>Title</th>
@@ -13,18 +11,16 @@
         <th>Published</th>
         <th>Upvote</th>
       </tr>
-    </thead>
-    <tbody>
+    </section>
+    <% category.each do |cat| %>
+    <section>
       <% @works.find_all{ |w| w.category == cat }.each do |work| %>
-      <tr>
+      <section class = "media-table">
         <td><%= work.votes.count %></td>
         <td><%= link_to work.title, work_path(work) %></td>
         <td><%= work.creator %></td>
         <td><%= work.publication_year %></td>
         <td><%= link_to "Upvote", new_vote_path(work.id), method: :post, class: "button upvote" %></td>
-      </tr>
       <% end%>
-    </tbody>
-  </table>
-</section>
+      </section>
 <% end %>
