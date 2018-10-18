@@ -1,6 +1,6 @@
 <h3>User Summary: <%= link_to(@user.username, user_path(@user.id))%></h3>
 
-<p>Joined site <%= @user.created_at%></p>
+<p>Joined site <%= readable_date(@user.created_at)%></p>
 
 <h4>Votes</h4>
 <section class="works-votes__container">
@@ -21,7 +21,7 @@
       <td><%= v.work.creator %></td>
       <td><%= v.work.publication_year %></td>
       <td><%= v.work.category.capitalize %></td>
-      <td><%= v.updated_at %></td>
+      <td><%= readable_date(v.updated_at) %></td>
     </tr>
     <% end %>
 

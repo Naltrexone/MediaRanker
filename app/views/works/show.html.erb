@@ -25,7 +25,7 @@
     <tbody>
       <tr>
         <td><a href="/users/#{@work.id}"><%=@work.title%></a></td>
-        <td><%=@work.created_at%></td>
+        <td><%= readable_date(@work.created_at)%></td>
       </li>
     </tbody>
 </section>
