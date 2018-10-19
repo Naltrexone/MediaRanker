@@ -3,8 +3,8 @@
       <h2 class="spotlight_header">
         <span class="spotlight_header_prefix">Media Spotlight:</span>
         <% if @works.count > 0  %>
-        <h2><u><%= link_to "#{@works.first.title}", work_path(@works.first.id) %></u> by
-          <%= @works.first.creator %></h2>
+        <u><%= link_to "#{@works.first.title}", work_path(@works.first.id) %></u> by
+          <%= @works.first.creator %>
       </h2>
       <h6 class="spotlight_description">
         <%= @works.first.votes.count %> votes - <%= @works.first.description %>
